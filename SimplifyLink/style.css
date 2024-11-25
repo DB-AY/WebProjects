@@ -1,0 +1,55 @@
+body {
+   background-color: #f0f0f0;
+}
+
+.container {
+   padding: 20px;
+}
+
+.card {
+   margin: 20px 0;
+   padding: 16px;
+   background: white;
+   border-radius: 8px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#tvStatus {
+   opacity: 0.6;
+}
+
+.scroll-container {
+   max-height: 400px;
+   overflow-y: auto;
+   margin-bottom: 20px;
+}
+
+textarea.materialize-textarea {
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   padding: 8px;
+   resize: none;
+}
+
+.output-text {
+   padding: 16px;
+   background-color: #f9f9f9;
+   border: 1px dashed #ccc;
+}
+
+.button-container {
+   margin-top: 20px;
+}
+
+.btn-flat.btn-icon {
+   border: none;
+   background: none;
+}
+
+.btn {
+   width: 100%;
+}
+
+.row {
+   margin-bottom: 10px;
+}
