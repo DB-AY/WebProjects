@@ -5,7 +5,8 @@ const todoListUL = document.getElementById('todo-list');
 let allTodos = getTodos();
 updateTodoList();
 
-setTimeout(() => todoInput.focus(), 10);
+todoForm.focus();
+setTimeout(() => todoInput.focus(), 100);
 todoForm.addEventListener('submit', function(e){
     e.preventDefault();
     addTodo();
