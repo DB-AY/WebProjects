@@ -22,7 +22,7 @@ class LinkSimplifier {
  
      this.init();
    }
- 
+
    getSetting(key, defaultValue) {
      // Stub for a settings retrieval mechanism
      return defaultValue;
@@ -64,7 +64,7 @@ class LinkSimplifier {
        newInput = newInput.replace(link, shortLink);
      }
  
-     this.tvOutput.innerHTML = this.formatLinks(newInput);
+     this.tvOutput.textContent = (newInput);
    }
  
    simplifyLink(link) {
