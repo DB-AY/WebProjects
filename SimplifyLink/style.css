@@ -7,11 +7,16 @@ body {
 }
 
 .card {
-   margin: 20px 0;
-   padding: 16px;
+   margin: 16px 0;
+   padding: 8px;
    background: white;
    border-radius: 8px;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#statusCard {
+   padding: 4px;
+   border-radius: 40px;
 }
 
 #tvStatus {
@@ -26,7 +31,7 @@ body {
 
 textarea.materialize-textarea {
    border: 1px solid #ccc;
-   border-radius: 4px;
+   border-radius: 8px;
    padding: 8px;
    resize: none;
 }
@@ -34,7 +39,8 @@ textarea.materialize-textarea {
 .output-text {
    padding: 16px;
    background-color: #f9f9f9;
-   border: 1px dashed #ccc;
+   /* border: 1px dashed #ccc; */
+   border-radius: 8px;
 }
 
 .button-container {

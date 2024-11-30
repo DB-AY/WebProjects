@@ -19,7 +19,7 @@ tvStatus.textContent = defaultStatusMessage;
 etInput.addEventListener('input', () => {
   const inputText = etInput.value.trim();
   if (!inputText) {
-    tvOutput.textContent = 'Output'; // Reset if empty
+    tvOutput.textContent = ''; // Reset if empty
     tvStatus.textContent = defaultStatusMessage;
   } else {
     tvOutput.textContent = inputText; // Mirror input
@@ -33,9 +33,7 @@ btCopy.addEventListener('click', () => {
     navigator.clipboard.writeText(tvOutput.textContent).then(() => {
       alert('Output copied to clipboard!');
     });
-  } else {
-    alert('Nothing to copy!');
-  }
+  } else alert('Nothing to copy!');
 });
 
 // Share the output text
