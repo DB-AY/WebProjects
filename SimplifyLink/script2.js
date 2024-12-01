@@ -73,7 +73,10 @@ function extractAllLinks(text) {
 function simplifyLink(link) {
   // Simplify the link (modify this function as per your logic)
   setCharSet(link)
-  return link.replace(currentRegex, ''); // Example: Remove "utm_" parameters and "&"
+  // Append ".*" to the regex to match everything from the regex match till the end of the string
+  const regexWithTail = new RegExp(currentRegex.source + '.*', currentRegex.flags);
+
+  return link.replace(regexWithTail, ''); // Replace everything from the match point onwards
 }
 
 function processLinks(inputText) {
