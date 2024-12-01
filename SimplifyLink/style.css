@@ -34,6 +34,8 @@ textarea.materialize-textarea {
    border-radius: 8px;
    padding: 8px;
    resize: none;
+   height: calc(10em);
+   /* Line height × max lines */
 }
 
 .output-text {
@@ -41,6 +43,9 @@ textarea.materialize-textarea {
    background-color: #f9f9f9;
    /* border: 1px dashed #ccc; */
    border-radius: 8px;
+   word-wrap: break-word; /* Break long words/URLs */
+   overflow-wrap: break-word; /* Additional support for modern browsers */
+   white-space: pre-wrap; /* Preserve new lines while wrapping text */
 }
 
 .button-container {
