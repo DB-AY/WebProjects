@@ -28,6 +28,8 @@ etInput.addEventListener('input', () => {
     tvStatus.textContent = defaultStatusMessage;
   } else {
     // tvOutput.textContent = shortenLinks(inputText); // Mirror input
+const updatedText = processLinks(inputText); // Process the text with simplified links
+  tvOutput.innerHTML = convertToHyperlinks(updatedText); // Display the processed output as clickable links
     tvStatus.textContent = successMessage;
   }
 });
@@ -65,6 +67,7 @@ function setCharSet(oldLink) {
 
   currentRegex = regexs[charSet];
 }
+
 function extractAllLinks(text) {
   const urlRegex = /(https?:\/\/)?[\w-]+(\.[\w-]+)+(\.[a-z]{2,3})?(:\d+)?(\/\S*)?/gi;
   return [...text.matchAll(urlRegex)].map((match) => match[0]); // Extract all matched URLs
@@ -100,12 +103,6 @@ function processLinks(inputText) {
 
   return processedText;
 }
-
-etInput.addEventListener('input', () => {
-  const inputText = etInput.value;
-  const updatedText = processLinks(inputText); // Process the text with simplified links
-  tvOutput.innerHTML = convertToHyperlinks(updatedText); // Display the processed output as clickable links
-});
 
 // Convert simplified links to clickable hyperlinks
 function convertToHyperlinks(text) {
