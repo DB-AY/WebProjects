@@ -23,7 +23,7 @@
 
 
 /* @media (min-aspect-ratio: 1) and (max-aspect-ratio: 3/2) and (min-width:800px) or (max-width: 1000px) { */
-@media (min-width: 800px) and (max-width: 1200px) {
+@media (orientation: landscape) and (min-width: 800px) and (max-width: 1200px) {
    .container {
       flex-direction: row;
       justify-content: center;
@@ -34,19 +34,12 @@
    }
 }
 
-@media (orientation: portrait),
-(max-width: 600px) {
+@media (orientation: portrait) or (max-width: 600px) {
    .container {
       flex-direction: column;
    }
 
    .container img {
       width: 95%;
-   }
-}
-
-@media (max-width: 800px) {
-   .container img {
-      max-width: 98%; /* Ensure images fill up the width on small screens */
    }
 }
