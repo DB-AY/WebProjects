@@ -1,39 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <title>Regex Basics</title>
   <style>
     .container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      align-content: center;
     }
 
     .container img {
       width: 100%;
-      max-width: 720px;
-      margin: 10px;
+      max-width: 800px;
+      margin: 8px;
     }
 
     @media (orientation: landscape) {
       .container {
         flex-direction: row;
       }
+
       .container img {
         width: 30%;
       }
     }
 
-    @media (orientation: portrait) {
+    @media (orientation: portrait), (max-width: 500px) {
       .container {
         flex-direction: column;
       }
+
       .container img {
         width: 90%;
       }
     }
+
+    @media (min-aspect-ratio: 1) and (max-aspect-ratio: 3/2) {
+      .container {
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .container img {
+        width: 45%;
+      }
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <img src="regex_sheet1.jpg" alt="Page 1">
@@ -41,4 +58,5 @@
     <img src="regex_sheet3.jpg" alt="Page 3">
   </div>
 </body>
+
 </html>
