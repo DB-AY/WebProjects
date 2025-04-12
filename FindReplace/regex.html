@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .container img {
+      width: 100%;
+      max-width: 500px;
+      margin: 10px;
+    }
+
+    @media (orientation: landscape) {
+      .container {
+        flex-direction: row;
+      }
+      .container img {
+        width: 30%;
+      }
+    }
+
+    @media (orientation: portrait) {
+      .container {
+        flex-direction: column;
+      }
+      .container img {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="regex_sheet1.jpg" alt="Page 1">
+    <img src="regex_sheet2.jpg" alt="Page 2">
+    <img src="regex_sheet3.jpg" alt="Page 3">
+  </div>
+</body>
+</html>
