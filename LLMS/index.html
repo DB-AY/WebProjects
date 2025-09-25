@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -7,25 +8,33 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Highlight.js CSS for code blocks -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css" />
   <style>
     :root {
       /* Purple themed color scheme */
       --background-color: #1e0a3c;
       --text-color: #ffffff;
-      --input-background: #2c0f4b;
+      --input-background: #222333;
       --user-message-color: #6c2d8c;
       --assistant-message-color: #442a6f;
       --button-color: #8e44ad;
       --accent-color: #bb86fc;
       --border-radius: 8px;
       --transition-speed: 0.3s;
-      --shadow: 0 2px 8px rgba(0,0,0,0.3);
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
-    * { box-sizing: border-box; }
-    body, html {
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
@@ -33,7 +42,13 @@
       background-color: var(--background-color);
       color: var(--text-color);
     }
-    #app { display: flex; flex-direction: column; height: 100%; }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
     /* Header: Server URL & Model Selection */
     #server-url-container {
       padding: 0.75rem;
@@ -44,6 +59,7 @@
       align-items: center;
       box-shadow: var(--shadow);
     }
+
     #server-url {
       flex-grow: 1;
       padding: 0.5rem 0.75rem;
@@ -55,6 +71,7 @@
       color: var(--text-color);
       font-size: 0.95rem;
     }
+
     /* Model selection dropdown */
     #model-select {
       padding: 0.5rem;
@@ -65,6 +82,7 @@
       background-color: var(--background-color);
       color: var(--text-color);
     }
+
     #connect-button {
       padding: 0.55rem 1rem;
       background-color: var(--button-color);
@@ -75,7 +93,11 @@
       font-size: 0.95rem;
       transition: background-color var(--transition-speed);
     }
-    #connect-button:hover { background-color: var(--accent-color); }
+
+    #connect-button:hover {
+      background-color: var(--accent-color);
+    }
+
     #connection-status {
       width: 100%;
       text-align: center;
@@ -84,12 +106,14 @@
       background-color: var(--input-background);
       color: #ddd;
     }
+
     /* Main content: sidebar + chat area */
     #main-content {
       display: flex;
       flex-grow: 1;
       overflow: hidden;
     }
+
     /* Chat sidebar */
     #chat-sidebar {
       width: 250px;
@@ -100,7 +124,11 @@
       position: relative;
       flex-shrink: 0;
     }
-    #chat-sidebar.collapsed { width: 40px; }
+
+    #chat-sidebar.collapsed {
+      width: 40px;
+    }
+
     /* Toggle sidebar button (right offset) */
     #toggle-sidebar {
       position: absolute;
@@ -116,16 +144,22 @@
       transition: background-color var(--transition-speed);
       z-index: 10;
     }
-    #toggle-sidebar:hover { background-color: var(--accent-color); }
+
+    #toggle-sidebar:hover {
+      background-color: var(--accent-color);
+    }
+
     /* Sidebar content */
     .sidebar-content {
       padding: 1rem;
       transition: opacity var(--transition-speed) ease;
     }
+
     #chat-sidebar.collapsed .sidebar-content {
       opacity: 0;
       pointer-events: none;
     }
+
     #chat-sidebar-header {
       display: flex;
       justify-content: space-between;
@@ -134,6 +168,7 @@
       font-size: 1.1rem;
       font-weight: 600;
     }
+
     #new-chat-button {
       width: 100%;
       padding: 0.5rem;
@@ -146,8 +181,17 @@
       transition: background-color var(--transition-speed);
       font-size: 0.9rem;
     }
-    #new-chat-button:hover { background-color: var(--accent-color); }
-    #chat-list { list-style: none; padding: 0; margin: 0; }
+
+    #new-chat-button:hover {
+      background-color: var(--accent-color);
+    }
+
+    #chat-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
     /* Chat titles */
     #chat-list li {
       padding: 0.75rem;
@@ -162,8 +206,16 @@
       font-size: 0.9rem;
       position: relative;
     }
-    #chat-list li:hover { background-color: var(--input-background); }
-    #chat-list li.active { background-color: var(--button-color); font-weight: 600; }
+
+    #chat-list li:hover {
+      background-color: var(--input-background);
+    }
+
+    #chat-list li.active {
+      background-color: var(--button-color);
+      font-weight: 600;
+    }
+
     /* Custom context menu for deleting chats */
     #context-menu {
       display: none;
@@ -176,6 +228,7 @@
       cursor: pointer;
       font-size: 0.9rem;
     }
+
     /* Chat section */
     #chat-section {
       flex-grow: 1;
@@ -187,6 +240,7 @@
       border-radius: 10px;
       margin: 1rem;
     }
+
     #chat-container {
       flex-grow: 1;
       overflow-y: auto;
@@ -194,9 +248,10 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      background: rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 8px;
     }
+
     /* Message card styling */
     .message {
       max-width: 85%;
@@ -209,20 +264,39 @@
       box-shadow: var(--shadow);
       animation: fadeIn 0.3s ease;
     }
-    .user-message { align-self: flex-end; background-color: var(--user-message-color); }
-    .assistant-message { align-self: flex-start; background-color: var(--assistant-message-color); }
+
+    .user-message {
+      align-self: flex-end;
+      background-color: var(--user-message-color);
+    }
+
+    .assistant-message {
+      align-self: flex-start;
+      background-color: var(--assistant-message-color);
+    }
+
     .message-header {
       font-weight: 600;
       margin-bottom: 0.35rem;
       font-size: 0.85rem;
     }
+
     .message-model {
       font-size: 0.75rem;
       color: #ccc;
       margin-bottom: 0.35rem;
     }
-    .message-content { margin-bottom: 0.5rem; }
-    .message-metrics { font-size: 0.75rem; color: #ccc; text-align: right; }
+
+    .message-content {
+      margin-bottom: 0.5rem;
+    }
+
+    .message-metrics {
+      font-size: 0.75rem;
+      color: #ccc;
+      text-align: right;
+    }
+
     /* Enhanced Markdown styling */
     .message-content h1,
     .message-content h2,
@@ -233,13 +307,19 @@
       margin: 0.5rem 0;
       font-weight: 600;
     }
-    .message-content p { margin: 0.5rem 0; line-height: 1.6; }
+
+    .message-content p {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+    }
+
     .message-content code {
-      background-color: rgba(27,31,35,0.15);
+      background-color: rgba(27, 31, 35, 0.15);
       padding: 0.2em 0.4em;
       border-radius: 4px;
       font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     }
+
     .message-content pre {
       background-color: #282c34;
       color: #abb2bf;
@@ -248,17 +328,19 @@
       border-radius: 6px;
       margin: 0.5rem 0;
     }
+
     .message-content blockquote {
       border-left: 4px solid var(--button-color);
       margin: 1rem 0;
       padding: 0.5rem 1rem;
       color: #ccc;
-      background: rgba(142,68,173,0.1);
+      background: rgba(142, 68, 173, 0.1);
     }
+
     /* Input container */
     #input-container {
       padding: 0.75rem;
-      background-color: rgba(44,15,75,0.8);
+      background-color: rgba(44, 15, 75, 0.8);
       border-top: 1px solid #333;
       display: flex;
       align-items: center;
@@ -266,6 +348,7 @@
       box-shadow: var(--shadow);
       border-radius: 10px;
     }
+
     /* Image upload button */
     #upload-button {
       background-color: var(--button-color);
@@ -280,9 +363,17 @@
       align-items: center;
       transition: background-color var(--transition-speed);
     }
-    #upload-button:hover { background-color: var(--accent-color); }
+
+    #upload-button:hover {
+      background-color: var(--accent-color);
+    }
+
     /* Image preview */
-    #image-preview { display: none; max-width: 50px; }
+    #image-preview {
+      display: none;
+      max-width: 50px;
+    }
+
     #user-input {
       flex-grow: 1;
       padding: 0.6rem 0.75rem;
@@ -292,7 +383,11 @@
       color: var(--text-color);
       font-size: 0.95rem;
     }
-    #user-input::placeholder { color: #bbb; }
+
+    #user-input::placeholder {
+      color: #bbb;
+    }
+
     #send-button {
       background-color: var(--button-color);
       color: var(--text-color);
@@ -306,17 +401,46 @@
       align-items: center;
       transition: background-color var(--transition-speed);
     }
-    #send-button:hover { background-color: var(--accent-color); }
+
+    #send-button:hover {
+      background-color: var(--accent-color);
+    }
+
     @media (max-width: 480px) {
-      .message { max-width: 90%; }
-      #server-url-container { flex-direction: column; align-items: stretch; }
-      #server-url, #connect-button, #model-select { width: 100%; margin-right: 0; margin-bottom: 0.5rem; }
-      #chat-sidebar { display: none; }
+      .message {
+        max-width: 90%;
+      }
+
+      #server-url-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #server-url,
+      #connect-button,
+      #model-select {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+      }
+
+      #chat-sidebar {
+        display: none;
+      }
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     /* Copy code button styles */
     .copy-btn {
       position: absolute;
@@ -332,7 +456,10 @@
       opacity: 0.8;
       transition: opacity 0.2s;
     }
-    .copy-btn:hover { opacity: 1; }
+
+    .copy-btn:hover {
+      opacity: 1;
+    }
   </style>
   <!-- Markdown rendering library -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -342,7 +469,7 @@
       breaks: true,
       smartypants: true,
       headerIds: false,
-      highlight: function(code, lang) {
+      highlight: function (code, lang) {
         if (lang && hljs.getLanguage(lang)) {
           return hljs.highlight(code, { language: lang }).value;
         }
@@ -359,7 +486,7 @@
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
-        packages: {'[+]': ['noerrors', 'noundefined']}
+        packages: { '[+]': ['noerrors', 'noundefined'] }
       },
       options: {
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
@@ -371,6 +498,7 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
+
 <body>
   <div id="app">
     <div id="server-url-container">
@@ -407,7 +535,9 @@
   <!-- Custom context menu for deleting chats -->
   <div id="context-menu">Delete Chat</div>
   <!-- Notification popup -->
-  <div id="notification-popup" style="display:none;position:fixed;top:30px;left:50%;transform:translateX(-50%);background:var(--button-color);color:#fff;padding:1rem 2rem;border-radius:8px;z-index:2000;font-size:1rem;box-shadow:0 2px 12px rgba(0,0,0,0.25);"></div>
+  <div id="notification-popup"
+    style="display:none;position:fixed;top:30px;left:50%;transform:translateX(-50%);background:var(--button-color);color:#fff;padding:1rem 2rem;border-radius:8px;z-index:2000;font-size:1rem;box-shadow:0 2px 12px rgba(0,0,0,0.25);">
+  </div>
   <script>
     // Global variables
     const chatContainer = document.getElementById('chat-container');
@@ -425,17 +555,17 @@
     const uploadButton = document.getElementById('upload-button');
     const imageUpload = document.getElementById('image-upload');
     const imagePreview = document.getElementById('image-preview');
-    
+
     let isConnected = false;
     let currentModel = '';
     let pendingImage = null;
     let isGenerating = false;
     let abortController = null;
-    
+
     // Chat management: each chat has an id, name, and messages array.
     let chats = [];
     let currentChat = null;
-    
+
     // Helper: Attach copy code buttons to code blocks
     function attachCopyButtons(container) {
       container.querySelectorAll('pre').forEach(pre => {
@@ -461,7 +591,7 @@
         }
       });
     }
-    
+
     // Saves the current chat and all chats to localStorage
     function saveChats() {
       try {
@@ -473,7 +603,7 @@
         console.error('Failed to save chats:', e);
       }
     }
-    
+
     // Loads chats from localStorage
     function loadChats() {
       try {
@@ -490,7 +620,7 @@
         console.error('Failed to load chats:', e);
       }
     }
-    
+
     // Save last server address
     function saveLastServerUrl(url) {
       try {
@@ -499,7 +629,7 @@
         // ignore
       }
     }
-    
+
     // Load last server address
     function loadLastServerUrl() {
       try {
@@ -508,7 +638,7 @@
         return '';
       }
     }
-    
+
     // Adds a message to the DOM and (optionally) stores it.
     // If store is false, the message is only displayed and not added to currentChat.messages.
     function addMessage(content, isUser, metrics = null, store = true) {
@@ -550,15 +680,15 @@
       if (typeof MathJax !== 'undefined') {
         MathJax.typesetPromise([messageDiv]).catch(err => console.error('MathJax typeset failed:', err));
       }
-      
+
       attachCopyButtons(messageDiv);
-      
+
       if (store && currentChat) {
         currentChat.messages.push({ content, isUser, metrics, isImage: false });
         saveChats();
       }
     }
-    
+
     // Adds an image message.
     function addImageMessage(dataURL, promptText) {
       // Display image message in the UI
@@ -570,7 +700,7 @@
       lastMsg.text = promptText;
       saveChats();
     }
-    
+
     // Creates a new chat.
     function createNewChat() {
       const chatId = Date.now();
@@ -581,7 +711,7 @@
       chatContainer.innerHTML = '';
       saveChats();
     }
-    
+
     // Renders the chat list in the sidebar.
     function updateChatList() {
       chatList.innerHTML = '';
@@ -655,7 +785,7 @@
         chatList.appendChild(li);
       });
     }
-    
+
     // Loads a chat's messages into the chat container.
     function loadChat(chat) {
       chatContainer.innerHTML = '';
@@ -664,7 +794,7 @@
         addMessage(message.content, message.isUser, message.metrics, false);
       });
     }
-    
+
     // Custom context menu for deleting chats.
     function showContextMenu(x, y, chatId) {
       contextMenu.style.left = x + "px";
@@ -687,7 +817,7 @@
       updateChatList();
       saveChats();
     }
-    
+
     // Ejects the currently loaded model.
     async function ejectCurrentModel(oldModel) {
       const serverUrl = serverUrlInput.value.trim();
@@ -702,7 +832,7 @@
         console.error("Error ejecting model:", error);
       }
     }
-    
+
     // Build conversation history without merging messages.
     // The history starts with the system prompt, then includes each stored message in order.
     function buildConversationHistory() {
@@ -725,7 +855,7 @@
       });
       return history;
     }
-    
+
     // Model selection change: eject old model if needed.
     modelSelect.addEventListener('change', async (e) => {
       const newModel = e.target.value;
@@ -736,7 +866,7 @@
       currentModel = newModel;
       modelSelect.disabled = false;
     });
-    
+
     // Connect to server and populate model dropdown.
     async function connectToServer() {
       const serverUrl = serverUrlInput.value.trim();
@@ -749,7 +879,11 @@
         updateConnectionStatus('Connecting...', false);
         const response = await fetch(`${serverUrl}/v1/models`, {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true',
+            'User-Agent': 'my-custom-client'
+          }
         });
         if (!response.ok) throw new Error('Server response was not ok');
         const data = await response.json();
@@ -779,7 +913,7 @@
         showNotification('Error: Unable to connect to the LM Studio server. Please check the address and try again.', 4000);
       }
     }
-    
+
     function updateConnectionStatus(message, connected) {
       connectionStatus.textContent = message;
       connectionStatus.style.color = connected ? 'var(--accent-color)' : '#f44336';
@@ -788,12 +922,12 @@
       userInput.disabled = !connected;
       sendButton.disabled = !connected;
     }
-    
+
     // Send message: if a pending image exists, include it.
     async function sendMessage() {
       let message = userInput.value.trim();
       if (!message && !pendingImage) return;
-    
+
       if (pendingImage) {
         let promptText = message || "What's in this image?";
         addImageMessage(pendingImage, promptText);
@@ -803,48 +937,51 @@
       } else {
         addMessage(message, true);
       }
-    
+
       const conversationHistory = buildConversationHistory();
-    
+
       // Create a temporary assistant message element for streaming response
       const assistantMessageElement = document.createElement('div');
       assistantMessageElement.classList.add('message', 'assistant-message');
-    
+
       const headerDiv = document.createElement('div');
       headerDiv.classList.add('message-header');
       headerDiv.textContent = 'Assistant';
       assistantMessageElement.appendChild(headerDiv);
-    
+
       if (currentModel) {
         const modelDiv = document.createElement('div');
         modelDiv.classList.add('message-model');
         modelDiv.textContent = currentModel;
         assistantMessageElement.appendChild(modelDiv);
       }
-    
+
       const assistantContentDiv = document.createElement('div');
       assistantContentDiv.classList.add('message-content');
       assistantMessageElement.appendChild(assistantContentDiv);
-    
+
       chatContainer.appendChild(assistantMessageElement);
       chatContainer.scrollTop = chatContainer.scrollHeight;
-    
+
       userInput.value = '';
       // userInput.disabled = true; // REMOVE this line to allow typing during generation
       sendButton.disabled = false;
       isGenerating = true;
       sendButton.innerHTML = '<i class="fas fa-stop"></i>';
-    
+
       abortController = new AbortController();
-    
+
       const serverUrl = serverUrlInput.value.trim();
       const startTime = performance.now();
       let accumulatedText = '';
-    
+
       try {
         const response = await fetch(`${serverUrl}/v1/chat/completions`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
+          },
           body: JSON.stringify({
             model: currentModel,
             messages: conversationHistory,
@@ -855,7 +992,7 @@
           signal: abortController.signal
         });
         if (!response.ok) throw new Error('Server response was not ok');
-    
+
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let done = false;
@@ -928,7 +1065,7 @@
         abortController = null;
       }
     }
-    
+
     // Image upload: store image and show preview.
     uploadButton.addEventListener('click', () => { imageUpload.click(); });
     imageUpload.addEventListener('change', () => {
@@ -943,7 +1080,7 @@
       reader.readAsDataURL(file);
       imageUpload.value = "";
     });
-    
+
     connectButton.addEventListener('click', () => {
       if (isConnected) {
         isConnected = false;
@@ -957,7 +1094,7 @@
         connectToServer();
       }
     });
-    
+
     userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
     sendButton.addEventListener('click', () => {
       if (isGenerating) {
@@ -972,7 +1109,7 @@
     });
     newChatButton.addEventListener('click', () => { createNewChat(); });
     toggleSidebarButton.addEventListener('click', () => { chatSidebar.classList.toggle('collapsed'); });
-    
+
     serverUrlInput.addEventListener('paste', (e) => {
       setTimeout(() => {
         if (serverUrlInput.value.trim()) {
@@ -980,7 +1117,7 @@
         }
       }, 50); // Wait for paste to complete
     });
-    
+
     // Save server URL on input change
     serverUrlInput.addEventListener('change', () => {
       const value = serverUrlInput.value.trim();
@@ -992,7 +1129,7 @@
         saveLastServerUrl(value);
       }
     });
-    
+
     // Load chats and last server URL on page load
     window.addEventListener('DOMContentLoaded', () => {
       loadChats();
@@ -1000,7 +1137,7 @@
       serverUrlInput.focus();
       connectButton.click();
     });
-    
+
     // Notification popup logic
     function showNotification(message, timeout = 3000) {
       const popup = document.getElementById('notification-popup');
@@ -1013,4 +1150,5 @@
     }
   </script>
 </body>
+
 </html>
