@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LM Studio Chat</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    input, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    #result {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>LM Studio Chat</h1>
+  <input id="prompt" type="text" placeholder="Type your message..." size="40">
+  <button id="sendBtn">Send</button>
+  <div id="result"></div>
+
+  <script>
+    async function callLmStudio(prompt) {
+      const res = await fetch("https://216612b7a1dd.ngrok-free.app/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "true"
+        },
+        body: JSON.stringify({
+          model: "google/gemma-3-4b",
+          stream: false,
+          messages: [
+            { role: "user", content: prompt }
+          ]
+        })
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`HTTP ${res.status}: ${text}`);
+      }
+
+      return res.json();
+    }
+
+    document.getElementById("sendBtn").addEventListener("click", async () => {
+      const prompt = document.getElementById("prompt").value;
+      const resultDiv = document.getElementById("result");
+      resultDiv.textContent = "Loading...";
+
+      try {
+        const data = await callLmStudio(prompt);
+        // Get assistant's reply text
+        const reply = data.choices?.[0]?.message?.content || "(no reply)";
+        resultDiv.textContent = reply;
+      } catch (err) {
+        resultDiv.textContent = "Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+*
+async function callLmStudio(prompt) {
+  const res = await fetch("https://216612b7a1dd.ngrok-free.app/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      model: "google/gemma-3-4b",
+      stream: false,
+      messages: [
+        { role: "user", content: prompt }
+      ]
+    })
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`HTTP ${res.status}: ${text}`);
+  }
+
+  return res.json();
+}
+
+// Example usage
+callLmStudio("Hello, how are you?")
+  .then(console.log)
+  .catch(console.error);
+*/

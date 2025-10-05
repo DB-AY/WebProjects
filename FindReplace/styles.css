@@ -21,7 +21,6 @@
    }
 }
 
-
 /* @media (min-aspect-ratio: 1) and (max-aspect-ratio: 3/2) and (min-width:800px) or (max-width: 1000px) { */
 @media (orientation: landscape) and (min-width: 800px) and (max-width: 1200px) {
    .container {

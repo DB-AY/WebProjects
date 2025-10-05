@@ -1,0 +1,36 @@
+/* Extracted from <style> in index.html */
+:root {
+  /* Purple themed color scheme */
+  --background-color: #1e0a3c;
+  --text-color: #ffffff;
+  --input-background: #2c0f4b;
+  --user-message-color: #6c2d8c;
+  --assistant-message-color: #442a6f;
+  --button-color: #8e44ad;
+  --accent-color: #bb86fc;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ...existing code... (all other CSS rules from <style> in index.html) ... */
